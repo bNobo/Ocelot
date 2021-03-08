@@ -130,12 +130,12 @@
                             .WithDownstreamRoute(downstreamRoute)
                             .WithUpstreamHttpMethod(new List<string> { "Get" })
                             .Build())))
-                .And(x => x.GivenTheDownstreamRequestUriIs("http://localhost:5000/api/subscriptions/1/updates?unitId=2&productId=2"))
+                .And(x => x.GivenTheDownstreamRequestUriIs("http://localhost:5000/api/subscriptions/1/updates?unitId=2&productId=2&subscriptionId=1"))
                 .And(x => GivenTheServiceProviderConfigIs(config))
                 .And(x => x.GivenTheUrlReplacerWillReturn("api/units/1/2/updates"))
                 .When(x => x.WhenICallTheMiddleware())
-                .Then(x => x.ThenTheDownstreamRequestUriIs("https://localhost:5000/api/units/1/2/updates?productId=2"))
-                .And(x => ThenTheQueryStringIs("?productId=2"))
+                .Then(x => x.ThenTheDownstreamRequestUriIs("https://localhost:5000/api/units/1/2/updates?productId=2&subscriptionId=1"))
+                .And(x => ThenTheQueryStringIs("?productId=2&subscriptionId=1"))
                 .BDDfy();
         }
 
